@@ -20,6 +20,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 public class CurrentSpellbookPlugin extends Plugin
 {
 	private static final int SPELLBOOK_VARBIT = 4070;
+
 	@Inject
 	private Client client;
 
@@ -35,24 +36,13 @@ public class CurrentSpellbookPlugin extends Plugin
 	@Override
 	protected void startUp() throws Exception
 	{
-		log.info("Current Spellbook started!");
 		overlayManager.add(currentSpellbookOverlay);
 	}
 
 	@Override
 	protected void shutDown() throws Exception
 	{
-		log.info("Current Spellbook stopped!");
 		overlayManager.remove(currentSpellbookOverlay);
-	}
-
-	@Subscribe
-	public void onGameStateChanged(GameStateChanged gameStateChanged)
-	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
-//			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
-		}
 	}
 
 	@Provides
@@ -60,7 +50,7 @@ public class CurrentSpellbookPlugin extends Plugin
 	{
 		return configManager.getConfig(CurrentSpellbookConfig.class);
 	}
-	
+
 	public int getCurrentSpellbook() {
 		return client.getVarbitValue(SPELLBOOK_VARBIT);
 	}
