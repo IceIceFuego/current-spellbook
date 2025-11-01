@@ -27,4 +27,14 @@ public interface CurrentSpellbookConfig extends Config
 	{
 		return true;
 	}
+
+	@ConfigItem(
+		keyName = "prependWith",
+		name = "Prepend with",
+		description = "Add this word or phrase before the spellbook name. A space will automatically be added between the two. You can leave this blank to only have the spellbook name."
+	)
+	default String prependWith()
+	{
+		return "Spellbook:";
+	}
 }

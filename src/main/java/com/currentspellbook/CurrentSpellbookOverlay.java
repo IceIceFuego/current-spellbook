@@ -1,7 +1,10 @@
 package com.currentspellbook;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics2D;
 import javax.inject.Inject;
-import java.awt.*;
 
 import net.runelite.api.Client;
 import net.runelite.client.ui.FontManager;
@@ -38,10 +41,18 @@ public class CurrentSpellbookOverlay extends OverlayPanel {
 
         String str = ColorUtil.prependColorTag(getName(spellbook), strColor);
 
-        panelComponent.getChildren().add(LineComponent.builder()
-                .left("Current spellbook:\n" + str)
-                .leftColor(strColor)
-                .build());
+		if (config.prependWith().isBlank())
+		{
+			panelComponent.getChildren().add(LineComponent.builder()
+				.left(str)
+				.leftColor(strColor)
+				.build());
+		} else {
+			panelComponent.getChildren().add(LineComponent.builder()
+				.left(config.prependWith() + " " + str)
+				.leftColor(strColor)
+				.build());
+		}
 
         return super.render(graphics);
     }
